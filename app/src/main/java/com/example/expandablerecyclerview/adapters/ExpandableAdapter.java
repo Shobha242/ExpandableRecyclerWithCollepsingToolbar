@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expandablerecyclerview.R;
+import com.example.expandablerecyclerview.models.ExpandableChildListModel;
 import com.example.expandablerecyclerview.models.ExpandableListModel;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class ExpandableAdapter extends RecyclerView.Adapter<ExpandableAdapter.MyViewHolder> {
 
     ArrayList<ExpandableListModel> arrayList;
-    ArrayList<ExpandableListModel> childList = new ArrayList<>();
+    ArrayList<ExpandableChildListModel> childList = new ArrayList<>();
     Context context;
     boolean isExpandable;
 
@@ -43,14 +44,17 @@ public class ExpandableAdapter extends RecyclerView.Adapter<ExpandableAdapter.My
     @Override
     public void onBindViewHolder(@NonNull ExpandableAdapter.MyViewHolder holder, int position) {
 
+
         holder.customerProductNo.setText(arrayList.get(position).getProductNumber());
 
-
         isExpandable = arrayList.get(position).isExpandable();
-        Log.d("isExpandable__", String.valueOf(isExpandable));
-        if (isExpandable) {
 
+        if (isExpandable) {
+            childList = arrayList.get(position).getChildList();
+            //childList.get(position).getChildList();
             holder.rv_child.setVisibility(View.VISIBLE);
+
+            Log.d("isExpandable__", String.valueOf(childList.size()));
             ExpandableChildAdapter adapter = new ExpandableChildAdapter(childList, context);
             holder.rv_child.setAdapter(adapter);
             expandableParentList();
@@ -61,14 +65,16 @@ public class ExpandableAdapter extends RecyclerView.Adapter<ExpandableAdapter.My
     }
 
     public void expandableParentList() {
-        childList.clear();
-        for (int i = 0; i < 5; i++) {
-            ExpandableListModel model = new ExpandableListModel();
-            model.setProductNumber("4759347534895");
-            model.setMobile("34095834095");
-            model.setSku("34958304985");
-            childList.add(model);
-        }
+        ExpandableChildListModel model = new ExpandableChildListModel();
+
+//        childList.clear();
+//        for (int i = 0; i < 5; i++) {
+//            ExpandableListModel model = new ExpandableListModel();
+//            model.setProductNumber("4759347534895");
+//            model.setMobile("34095834095");
+//            model.setSku("34958304985");
+//            childList.add(model);
+//        }
     }
 
 

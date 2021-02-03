@@ -10,22 +10,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expandablerecyclerview.R;
+import com.example.expandablerecyclerview.models.ExpandableChildListModel;
 import com.example.expandablerecyclerview.models.ExpandableListModel;
 
 import java.util.ArrayList;
 
 public class ExpandableChildAdapter extends RecyclerView.Adapter<ExpandableChildAdapter.MyViewHolder> {
 
-    ArrayList<ExpandableListModel> arrayList;
+    ArrayList<ExpandableChildListModel> arrayList;
     Context context;
 
 
-    public ExpandableChildAdapter(ArrayList<ExpandableListModel> arrayList, Context context) {
+    public ExpandableChildAdapter(ArrayList<ExpandableChildListModel> arrayList, Context context) {
         this.context = context;
         this.arrayList = arrayList;
 
@@ -40,12 +42,13 @@ public class ExpandableChildAdapter extends RecyclerView.Adapter<ExpandableChild
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        ExpandableChildListModel model = arrayList.get(position);
         Log.d("ExpandableChil_", String.valueOf(arrayList.size()));
-        holder.customerProductnameMobno.setText(arrayList.get(position).getMobile());
+        holder.customerProductnameMobno.setText(model.getMobile());
         holder.customerProductmodelno.setText(arrayList.get(position).getSku());
 
     }
-
 
     @Override
     public int getItemCount() {

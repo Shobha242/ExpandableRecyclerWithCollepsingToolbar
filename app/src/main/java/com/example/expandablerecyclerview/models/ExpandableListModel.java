@@ -1,8 +1,19 @@
 package com.example.expandablerecyclerview.models;
 
+import java.util.ArrayList;
+
 public class ExpandableListModel {
     String ProductNumber, sku, mobile;
     public boolean isExpandable;
+    ArrayList<ExpandableChildListModel> childList;
+
+    public ArrayList<ExpandableChildListModel> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(ArrayList<ExpandableChildListModel> childList) {
+        this.childList = childList;
+    }
 
     public ExpandableListModel() {
         this.isExpandable = false;
